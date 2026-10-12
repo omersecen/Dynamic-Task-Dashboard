@@ -37,4 +37,10 @@ class TaskManager {
       return task.id === taskId ? task.toggle() : task;
     });
   }
+
+  renameTask(taskId, title) {
+    this.tasks = this.tasks.map(task => {
+      return task.id === taskId ? new Task(task.id, title, task.completed) : task;
+    });
+  }
 }

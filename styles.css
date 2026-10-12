@@ -81,6 +81,7 @@ button:hover {
 
 .task {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -96,7 +97,14 @@ button:hover {
 
 .task-actions {
   display: flex;
+  flex-wrap: wrap;
   flex-shrink: 0;
+  gap: 8px;
+}
+
+.task-editor {
+  display: flex;
+  flex-basis: 100%;
   gap: 8px;
 }
 
@@ -179,5 +187,14 @@ input:focus-visible {
 
   .add-task-row {
     flex-direction: column;
+  }
+
+  .task-editor {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .task-editor input {
+    flex-basis: 100%;
   }
 }

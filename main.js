@@ -6,7 +6,7 @@ const addTaskForm = document.getElementById("addTaskForm");
 const taskTitle = document.getElementById("taskTitle");
 const addTaskBtn = document.getElementById("addTaskBtn");
 
-function renderTasks() {
+function renderTasks(focusTaskId) {
   taskList.textContent = "";
 
   manager.tasks.forEach(task => {
@@ -29,6 +29,69 @@ function renderTasks() {
       renderTasks();
     });
 
+    const editBtn = document.createElement("button");
+    editBtn.type = "button";
+    editBtn.textContent = "Edit";
+    editBtn.setAttribute("aria-label", `Edit ${task.title}`);
+    editBtn.addEventListener("click", () => {
+      const editor = document.createElement("form");
+      editor.classList.add("task-editor");
+      const editInput = document.createElement("input");
+      editInput.type = "text";
+      editInput.value = task.title;
+      editInput.required = true;
+      editInput.maxLength = 120;
+      editInput.setAttribute("aria-label", `New title for ${task.title}`);
+
+      const saveBtn = document.createElement("button");
+      saveBtn.type = "submit";
+      saveBtn.textContent = "Save";
+      const cancelBtn = document.createElement("button");
+      cancelBtn.type = "button";
+      cancelBtn.textContent = "Cancel";
+
+      editor.addEventListener("submit", event => {
+        event.preventDefault();
+        const trimmedTitle = editInput.value.trim();
+        if (!trimmedTitle) {
+          statusMessage.textContent = "Please enter a task title.";
+          statusMessage.classList.add("error");
+          editInput.focus();
+          return;
+        }
+        manager.renameTask(task.id, trimmedTitle);
+        renderTasks(task.id);
+        statusMessage.textContent = "";
+        statusMessage.classList.remove("error");
+      });
+
+      cancelBtn.addEventListener("click", () => {
+        editor.remove();
+        toggleBtn.disabled = false;
+        editBtn.disabled = false;
+        deleteBtn.disabled = false;
+        statusMessage.textContent = "";
+        statusMessage.classList.remove("error");
+        editBtn.focus();
+      });
+      editInput.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          cancelBtn.click();
+        }
+      });
+
+      editor.appendChild(editInput);
+      editor.appendChild(saveBtn);
+      editor.appendChild(cancelBtn);
+      taskDiv.appendChild(editor);
+      toggleBtn.disabled = true;
+      editBtn.disabled = true;
+      deleteBtn.disabled = true;
+      editInput.focus();
+      editInput.select();
+    });
+
     const deleteBtn = document.createElement("button");
     deleteBtn.type = "button";
     deleteBtn.textContent = "Delete";
@@ -42,11 +105,15 @@ function renderTasks() {
     const actions = document.createElement("div");
     actions.classList.add("task-actions");
     actions.appendChild(toggleBtn);
+    actions.appendChild(editBtn);
     actions.appendChild(deleteBtn);
 
     taskDiv.appendChild(title);
     taskDiv.appendChild(actions);
     taskList.appendChild(taskDiv);
+    if (task.id === focusTaskId) {
+      editBtn.focus();
+    }
   });
 }
 
