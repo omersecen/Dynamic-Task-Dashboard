@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="taskManager.js" defer></script>
+  <script src="api.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <main class="dashboard">
+    <header>
+      <p class="course-label">Web Programming · Assignment 4</p>
+      <h1>Task Dashboard</h1>
+      <p class="intro">Keep track of your study tasks.</p>
+    </header>
+
+    <section aria-label="Tasks">
+      <div class="toolbar">
+        <h2>My tasks</h2>
+        <button id="loadTasksBtn" type="button">Load Tasks</button>
+      </div>
+      <p class="hint">Load Tasks restores the three sample tasks. Changes last until you reload the page.</p>
+      <form id="addTaskForm">
+        <label for="taskTitle">New task</label>
+        <div class="add-task-row">
+          <input id="taskTitle" name="title" type="text" maxlength="120" placeholder="What do you need to study?" required>
+          <button id="addTaskBtn" type="submit">Add Task</button>
+        </div>
+      </form>
+      <p id="statusMessage" role="status" aria-live="polite"></p>
+      <div id="taskList"></div>
+    </section>
+  </main>
+</body>
+</html>
