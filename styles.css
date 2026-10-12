@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f5f7;
+  color: #253246;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.dashboard {
+  width: min(720px, 100% - 40px);
+  margin: 64px auto;
+}
+
+.course-label {
+  color: #567083;
+  font-size: 14px;
+}
+
+h1 {
+  margin: 8px 0;
+  font-size: 36px;
+}
+
+.intro {
+  margin: 0 0 32px;
+  color: #596779;
+}
+
+section {
+  padding: 24px;
+  border: 1px solid #dbe1e8;
+  border-radius: 12px;
+  background: white;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+button {
+  padding: 10px 16px;
+  border: 1px solid #c8d1dd;
+  border-radius: 6px;
+  background: #f5f7fa;
+  color: #253246;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #e8eef5;
+}
+
+#loadTasksBtn {
+  border-color: #285ba9;
+  background: #285ba9;
+  color: white;
+}
+
+#loadTasksBtn:hover {
+  background: #204a8a;
+}
+
+#statusMessage {
+  min-height: 24px;
+  margin: 16px 0;
+  color: #596779;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px solid #dbe1e8;
+  border-radius: 8px;
+}
+
+.task > span {
+  overflow-wrap: anywhere;
+}
+
+.task-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.completed {
+  background: #f0f7f2;
+  border-color: #c9dece;
+}
+
+.completed > span {
+  color: #4e6656;
+  text-decoration: line-through;
+}
+
+.delete-btn {
+  color: #9a3333;
+}
+
+button:focus-visible {
+  outline: 3px solid #678fcd;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+#statusMessage.error {
+  color: #9a3333;
+}
+
+.hint {
+  margin: 12px 0 24px;
+  color: #596779;
+  font-size: 14px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.add-task-row {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  min-width: 0;
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #c8d1dd;
+  border-radius: 6px;
+  font: inherit;
+}
+
+input:focus-visible {
+  outline: 3px solid #678fcd;
+  outline-offset: 3px;
+}
+
+@media (max-width: 540px) {
+  .dashboard {
+    margin: 32px auto;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  section {
+    padding: 16px;
+  }
+
+  .task {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .add-task-row {
+    flex-direction: column;
+  }
+}
